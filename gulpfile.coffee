@@ -26,7 +26,16 @@ gulp.task 'styl', ->
     .pipe styl()
     .pipe gulp.dest(paths.dest)
 
-gulp.task 'default', ['jade', 'styl', 'coffee']
+gulp.task 'copy-json', ->
+  gulp.src 'lib/emoji/emojis.json'
+    .pipe gulp.dest("#{paths.dest}data")
+
+gulp.task 'copy-asset', ->
+  gulp.src ['lib/emoji/stylesheets/emoji.css', 'lib/emoji/emoji.png']
+    .pipe gulp.dest(paths.dest)
+
+gulp.task 'copy', ['copy-json', 'copy-asset']
+gulp.task 'default', ['jade', 'styl', 'coffee', 'copy']
 gulp.task 'watch', ['default'], ->
   gulp.watch paths.jade, ['jade']
   gulp.watch paths.styl, ['styl']
