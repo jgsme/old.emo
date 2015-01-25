@@ -1,0 +1,3 @@
+[submodule "lib/emoji"]
+	path = lib/emoji
+	url = https://github.com/muan/emoji.git
