@@ -1,7 +1,18 @@
-emo-finder
+finder
   form
     input(onkeyup='{ change }')
+    emojis(data='{ emojis }')
 
   script(type='text/coffeescript').
+    @emojis = []
+
+    aja()
+      .method 'get'
+      .url '/data/emojis.json'
+      .on 'success', (emojis)=>
+        @update
+          emojis: Object.keys(emojis)
+      .go()
+
     @change = (event)->
       console.log event
