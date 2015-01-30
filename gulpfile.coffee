@@ -4,11 +4,14 @@ coffee = require 'gulp-coffee'
 styl = require 'gulp-stylus'
 conn = require 'gulp-connect'
 deploy = require 'gulp-gh-pages'
+riot = require 'gulp-riot'
+concat = require 'gulp-concat'
+gulpif = require 'gulp-if'
 
 paths =
   jade: 'src/*.jade'
   styl: 'src/*.styl'
-  coffee: 'src/*.coffee'
+  js: ['src/components/*.jade', 'src/*.coffee']
   dest: 'build/'
 
 gulp.task 'jade', ->
@@ -16,9 +19,14 @@ gulp.task 'jade', ->
     .pipe jade()
     .pipe gulp.dest(paths.dest)
 
-gulp.task 'coffee', ->
-  gulp.src paths.coffee
-    .pipe coffee()
+gulp.task 'js', ->
+  gulp.src paths.js
+    .pipe gulpif(/\.coffee/, coffee())
+    .pipe gulpif(/\.jade/, riot
+      template: 'jade'
+      compact: true
+    )
+    .pipe concat 'index.js'
     .pipe gulp.dest(paths.dest)
 
 gulp.task 'styl', ->
@@ -35,13 +43,14 @@ gulp.task 'copy-asset', ->
     .pipe gulp.dest(paths.dest)
 
 gulp.task 'copy', ['copy-json', 'copy-asset']
-gulp.task 'default', ['jade', 'styl', 'coffee', 'copy']
+gulp.task 'default', ['jade', 'styl', 'js', 'copy']
 gulp.task 'watch', ['default'], ->
   gulp.watch paths.jade, ['jade']
   gulp.watch paths.styl, ['styl']
-  gulp.watch paths.coffee, ['coffee']
+  gulp.watch paths.js, ['js']
   conn.server
     root: 'build'
+    port: 3001
 
 gulp.task 'deploy', ['default'], ->
   gulp.src './build/*'
