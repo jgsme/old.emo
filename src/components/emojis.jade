@@ -1,4 +1,20 @@
 emojis
-  span(each='{ emoji in opts.data }') { emoji }
+  .pure-u-1(each='{ emojis in emojiRow }')
+    span.pure-u-1-10(each='{ emoji in emojis }') { emoji }
 
   script(type='text/coffeescript').
+    @emojiRow = []
+    @on 'update', =>
+      res = []
+      tmp = []
+      for emoji, i in opts.data
+        if i % 10 is 0
+          if i is 0
+            tmp = [emoji]
+          else
+            res.push tmp
+            tmp = [emoji]
+        else
+          tmp.push emoji
+      if tmp.length > 0 then res.push tmp
+      @emojiRow = res
