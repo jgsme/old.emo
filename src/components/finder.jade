@@ -5,14 +5,20 @@ finder
 
   script(type='text/coffeescript').
     @emojis = []
+    fuse = original = null
 
     aja()
       .method 'get'
       .url '/data/emojis.json'
       .on 'success', (emojis)=>
+        original = emojis
         @update
-          emojis: Object.keys(emojis)
+          emojis: emojis
+        fuse = new Fuse emojis,
+          keys: ['name', 'keywords']
       .go()
 
     @change = (event)->
-      console.log event
+      searchWord = event.target.value
+      @update
+        emojis: if searchWord.length is 0 then original else fuse.search searchWord
