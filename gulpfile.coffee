@@ -7,6 +7,7 @@ deploy = require 'gulp-gh-pages'
 riot = require 'gulp-riot'
 concat = require 'gulp-concat'
 gulpif = require 'gulp-if'
+generateJson = require './gulp/helper/generate-json'
 
 paths =
   jade: 'src/*.jade'
@@ -34,15 +35,16 @@ gulp.task 'styl', ->
     .pipe styl()
     .pipe gulp.dest(paths.dest)
 
-gulp.task 'copy-json', ->
-  gulp.src 'lib/emoji/emojis.json'
+gulp.task 'generate-json', ->
+  gulp.src ['lib/emoji/emojis.json']
+    .pipe generateJson()
     .pipe gulp.dest("#{paths.dest}data")
 
 gulp.task 'copy-asset', ->
   gulp.src ['lib/emoji/stylesheets/emoji.css', 'lib/emoji/emoji.png']
     .pipe gulp.dest(paths.dest)
 
-gulp.task 'copy', ['copy-json', 'copy-asset']
+gulp.task 'copy', ['generate-json', 'copy-asset']
 gulp.task 'default', ['jade', 'styl', 'js', 'copy']
 gulp.task 'watch', ['default'], ->
   gulp.watch paths.jade, ['jade']
