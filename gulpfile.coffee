@@ -7,6 +7,7 @@ deploy = require 'gulp-gh-pages'
 riot = require 'gulp-riot'
 concat = require 'gulp-concat'
 gulpif = require 'gulp-if'
+uglify = require 'gulp-uglify'
 generateJson = require './gulp/helper/generate-json'
 
 paths =
@@ -28,6 +29,7 @@ gulp.task 'js', ->
       compact: true
     )
     .pipe concat 'index.js'
+    .pipe gulpif(process.env.CI is 'true', uglify())
     .pipe gulp.dest(paths.dest)
 
 gulp.task 'styl', ->
@@ -54,7 +56,7 @@ gulp.task 'watch', ['default'], ->
     root: 'build'
     port: 3001
 
-gulp.task 'deploy', ['default'], ->
-  gulp.src './build/*'
+gulp.task 'deploy', ->
+  gulp.src './build/**/*'
     .pipe deploy
       cacheDir: 'tmp'
