@@ -6,6 +6,7 @@ emojis
     p
       span.tag.tag-blue { current.unicode }
       span.tag.tag-green(each='{ key in current.keywords }') { key }
+      a(href='https://github.com/jgsme/emo/edit/master/src/data/emojis.custom.ja.json'): span.tag.tag-red Add new one?
   span(each='{ emoji in emojis }', class='emo emo-margin emoji s_{ emoji.name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data='{ JSON.stringify(emoji) }')
 
   script(type='text/coffeescript').
