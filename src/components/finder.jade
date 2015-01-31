@@ -12,10 +12,13 @@ finder
       .method 'get'
       .url '/data/emojis.json'
       .on 'success', (emojis)=>
-        original = emojis
+        original = for emoji in emojis
+          name: emoji.name
+          unicode: emoji.keywords[emoji.keywords.length-1]
+          keywords: emoji.keywords.slice 0, -1
         @update
-          emojis: emojis
-        fuse = new Fuse emojis,
+          emojis: original
+        fuse = new Fuse original,
           threshold: 0.3
           keys: ['name', 'keywords']
         hash = location.hash.replace /#/, ''

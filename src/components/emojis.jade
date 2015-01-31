@@ -1,16 +1,18 @@
 emojis
   #info(if='{ current }')
-    p.current-container
+    p.current-container(onclick='{ copy }')
       span(class='emo emoji v-align s_{ current.name.replace(/\\\\+/, "") }')
-      span.current.v-align :{ current.name }:
+      input#currentInput.v-align(value=':{ current.name }:')
     p
-      span.tag(each='{ key in current.keywords }') { key }
+      span.tag.tag-blue { current.unicode }
+      span.tag.tag-green(each='{ key in current.keywords }') { key }
   span(each='{ emoji in emojis }', class='emo emo-margin emoji s_{ emoji.name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data='{ JSON.stringify(emoji) }')
 
   script(type='text/coffeescript').
     @emojis = []
 
     @show = (event)=> @current = JSON.parse event.target.getAttribute 'data'
+    @copy = (event)=> document.getElementById('currentInput').select()
 
     @on 'update', =>
       @emojis = opts.data

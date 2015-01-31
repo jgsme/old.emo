@@ -36,7 +36,7 @@ gulp.task 'styl', ->
     .pipe gulp.dest(paths.dest)
 
 gulp.task 'generate-json', ->
-  gulp.src ['lib/emoji/emojis.json', 'src/data/emojis.ja.json']
+  gulp.src ['lib/emoji/emojis.json', 'src/data/emojis.ja.json', 'src/data/unicode.json']
     .pipe generateJson()
     .pipe gulp.dest("#{paths.dest}data")
 
