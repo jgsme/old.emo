@@ -1,3 +1,6 @@
 [submodule "lib/emoji"]
 	path = lib/emoji
 	url = https://github.com/muan/emoji.git
+[submodule "lib/Fuse"]
+	path = lib/Fuse
+	url = https://github.com/krisk/Fuse.git

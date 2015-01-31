@@ -11,7 +11,7 @@ gulpif = require 'gulp-if'
 paths =
   jade: 'src/*.jade'
   styl: 'src/*.styl'
-  js: ['src/components/*.jade', 'src/*.coffee']
+  js: ['lib/Fuse/src/fuse.min.js', 'src/components/*.jade', 'src/*.coffee']
   dest: 'build/'
 
 gulp.task 'jade', ->
