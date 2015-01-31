@@ -1,6 +1,6 @@
 emojis
   .pure-u-1(each='{ emojis in emojiRow }')
-    span.pure-u-1-10(each='{ emoji in emojis }') { emoji }
+    span.pure-u-1-10(each='{ emojis }', class='block emoji s_{ name }')
 
   script(type='text/coffeescript').
     @emojiRow = []
