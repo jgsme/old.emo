@@ -2,3 +2,22 @@ box: wercker/nodejs
 build:
   steps:
     - npm-install
+    - script:
+        name: Build
+        code: npm run build
+    - script:
+        name: Debug
+        code: cat ./build/index.js
+
+deploy:
+  steps:
+    - script:
+        name: Configure git
+        hide-from-log: true
+        code: |
+          git config --global user.email "jigsaw@live.jp"
+          git config --global user.name "jigsaw-wercker"
+          git remote set-url origin $github_remote
+    - script:
+        name: Deploy to github pages
+        code: npm run deploy
