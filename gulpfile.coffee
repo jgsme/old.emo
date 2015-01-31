@@ -41,7 +41,7 @@ gulp.task 'generate-json', ->
     .pipe gulp.dest("#{paths.dest}data")
 
 gulp.task 'copy-asset', ->
-  gulp.src ['lib/emoji/stylesheets/emoji.css', 'lib/emoji/emoji.png']
+  gulp.src ['lib/emoji/stylesheets/emoji.css', 'lib/emoji/emoji.png', 'src/CNAME']
     .pipe gulp.dest(paths.dest)
 
 gulp.task 'copy', ['generate-json', 'copy-asset']
