@@ -1,7 +1,16 @@
 emojis
-  span(each='{ emojis }', class='emo emoji s_{ name.replace(/\\\\+/, "") }')
+  #info(if='{ current }')
+    p.current-container
+      span(class='emo emoji v-align s_{ current.name.replace(/\\\\+/, "") }')
+      span.current.v-align :{ current.name }:
+    p
+      span.tag(each='{ key in current.keywords }') { key }
+  span(each='{ emoji in emojis }', class='emo emo-margin emoji s_{ emoji.name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data='{ JSON.stringify(emoji) }')
 
   script(type='text/coffeescript').
     @emojis = []
+
+    @show = (event)=> @current = JSON.parse event.target.getAttribute 'data'
+
     @on 'update', =>
       @emojis = opts.data

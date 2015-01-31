@@ -1,10 +1,46 @@
 .emo
   display inline-block
+
+.emo-margin
   margin 1em
 
 .emojis
   width 60%
   margin 0 auto
+
+.v-align
+  vertical-align 24px
+
+.current
+  display inline-block
+  height 24px
+  margin-left .3em
+  font-size 24px
+
+.current-container
+  cursor pointer
+  height 24px
+
+.tag
+  background-color #079017
+  color #eaeaea
+  display inline-block
+  font-size 16px
+  font-weight bold
+  margin 2px 2px 2px 18px
+  padding-right 4px
+  position relative
+
+  &:before
+    border-top 12px solid transparent
+    border-right 12px solid #079017
+    border-bottom 12px solid transparent
+    content ' '
+    height 0
+    position absolute
+    top 0
+    left -12px
+    width 0
 
 form
   text-align center
