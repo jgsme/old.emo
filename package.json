@@ -8,6 +8,7 @@
   "author": "jigsaw (http://jgs.me)",
   "license": "MIT",
   "devDependencies": {
+    "aja": "^0.3.3",
     "coffee-script": "^1.8.0",
     "gulp": "^3.8.10",
     "gulp-coffee": "^2.2.0",
@@ -22,6 +23,7 @@
     "jade": "^1.9.1",
     "mstranslator": "^1.1.0",
     "neo-async": "^0.4.9",
+    "riot": "^2.0.7",
     "through2": "^0.6.3"
   }
 }

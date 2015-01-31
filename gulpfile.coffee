@@ -12,7 +12,7 @@ generateJson = require './gulp/helper/generate-json'
 paths =
   jade: 'src/*.jade'
   styl: 'src/*.styl'
-  js: ['lib/Fuse/src/fuse.min.js', 'src/components/*.jade', 'src/*.coffee']
+  js: ['node_modules/riot/riot.min.js', 'node_modules/aja/aja.min.js', 'lib/Fuse/src/fuse.min.js', 'src/components/*.jade', 'src/*.coffee']
   dest: 'build/'
 
 gulp.task 'jade', ->
