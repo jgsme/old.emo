@@ -1,6 +1,7 @@
 finder
-  form
-    input(onkeyup='{ change }')
+  form(class='pure-form')
+    input#in(onkeyup='{ change }', autofocus)
+  .emojis
     emojis(data='{ emojis }')
 
   script(type='text/coffeescript').
@@ -17,9 +18,15 @@ finder
         fuse = new Fuse emojis,
           threshold: 0.3
           keys: ['name', 'keywords']
+        hash = location.hash.replace /#/, ''
+        document.getElementById('in').value = hash
+        @change
+          target:
+            value: hash
       .go()
 
     @change = (event)->
       searchWord = event.target.value
       @update
         emojis: if searchWord.length is 0 then original else fuse.search searchWord
+      location.hash = searchWord
