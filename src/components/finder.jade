@@ -19,7 +19,8 @@ finder
         @update
           emojis: original
         fuse = new Fuse original,
-          threshold: 0.3
+          threshold: 0.1
+          distance: 800
           keys: ['name', 'keywords']
         hash = location.hash.replace /#/, ''
         document.getElementById('in').value = hash
