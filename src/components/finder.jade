@@ -2,7 +2,7 @@ finder
   form(class='pure-form')
     input#in(onkeyup='{ change }', autofocus)
   .emojis
-    emojis(data='{ emojis }')
+    emojis(data='{ emojis }', tagsearch='{ tagsearch }')
 
   script(type='text/coffeescript').
     @emojis = []
@@ -29,7 +29,13 @@ finder
             value: hash
       .go()
 
-    @change = (event)->
+    @tagsearch = (event)=>
+      document.getElementById('in').value = event.target.innerText
+      @change
+        target:
+          value: event.target.innerText
+
+    @change = (event)=>
       searchWord = event.target.value
       @update
         emojis: if searchWord.length is 0 then original else fuse.search searchWord
