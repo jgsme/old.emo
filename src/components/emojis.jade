@@ -5,15 +5,18 @@ emojis
       input#currentInput.v-align(value=':{ current.name }:')
     p
       span.tag.tag-blue { current.unicode }
-      span.tag.tag-green(each='{ key in current.keywords }') { key }
+      span.tag.tag-green(each='{ key in current.keywords }', onclick='{ parent.tagSearch }') { key }
       a(href='https://github.com/jgsme/emo/edit/master/src/data/emojis.custom.ja.json'): span.tag.tag-red Add new one?
   span(each='{ emoji in emojis }', class='emo emo-margin emoji s_{ emoji.name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data='{ JSON.stringify(emoji) }')
 
   script(type='text/coffeescript').
     @emojis = []
 
-    @show = (event)=> @current = JSON.parse event.target.getAttribute 'data'
+    @show = (event)=>
+      @current = JSON.parse event.target.getAttribute 'data'
+      document.body.scrollTop = 0
     @copy = (event)=> document.getElementById('currentInput').select()
+    @tagSearch = opts.tagsearch
 
     @on 'update', =>
       @emojis = opts.data
