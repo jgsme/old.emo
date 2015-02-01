@@ -44,6 +44,7 @@
 }
 .tag-green {
   background-color: #079017;
+  cursor: pointer;
 }
 .tag-green:before {
   border-right: 12px solid #079017;
