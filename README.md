@@ -1,7 +1,7 @@
 http://emo.jgs.me
 =================
 
-[![devDependency Status](https://david-dm.org/e-jigsaw/gulp-riot/dev-status.svg)](https://david-dm.org/e-jigsaw/gulp-riot#info=devDependencies) [![wercker status](https://app.wercker.com/status/63c6b72560767883a2e6769e30789060/s/master "wercker status")](https://app.wercker.com/project/bykey/63c6b72560767883a2e6769e30789060)
+[![devDependency Status](https://david-dm.org/jgsme/emo/dev-status.svg)](https://david-dm.org/jgsme/emo#info=devDependencies) [![wercker status](https://app.wercker.com/status/63c6b72560767883a2e6769e30789060/s/master "wercker status")](https://app.wercker.com/project/bykey/63c6b72560767883a2e6769e30789060)
 
 :jp: emoji search by Japanese
 
