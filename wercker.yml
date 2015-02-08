@@ -5,9 +5,6 @@ build:
     - script:
         name: Build
         code: npm run build
-    - script:
-        name: Debug
-        code: cat ./build/index.js
 
 deploy:
   steps:
