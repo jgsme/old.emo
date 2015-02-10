@@ -7,7 +7,9 @@ http://emo.jgs.me
 
 # Usage
 
-*TODO*
+![](https://qiita-image-store.s3.amazonaws.com/0/25679/a8a80249-bdd4-af25-5b48-b4281857e242.gif)
+
+![](https://qiita-image-store.s3.amazonaws.com/0/25679/0447db93-e09e-8fde-a2d6-693884960f97.gif)
 
 ## How to add new keyword
 
