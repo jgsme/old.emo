@@ -1,0 +1,17 @@
+current
+  #info.emojis(if='{ current != undefined }')
+    p.current-container(onclick='{ copy }')
+      span(class='emo emoji v-align s_{ current.name.replace(/\\\\+/, "") }')
+      input#currentInput.v-align(value=':{ current.name }:')
+    p
+      span.tag.tag-blue { current.unicode }
+      span.tag.tag-green(each='{ key in current.keywords }', onclick='{ parent.tagSearch }') { key }
+      a(href='https://github.com/jgsme/emo/edit/master/src/data/emojis.custom.ja.json'): span.tag.tag-red Add new one?
+
+  script(type='text/coffeescript').
+    @copy = (event)=> document.getElementById('currentInput').select()
+    @tagSearch = opts.tagsearch
+
+    @on 'update', =>
+      console.log @current
+      @current = opts.data

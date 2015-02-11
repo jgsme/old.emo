@@ -1,27 +1,24 @@
 finder
   form(class='pure-form', onsubmit='return false;')
     input#in(onkeyup='{ change }', autofocus)
+  current(data='{ current }', tagsearch='{ tagsearch }')
   .emojis
-    emojis(data='{ emojis }', tagsearch='{ tagsearch }')
+    emojis(data='{ emojis }', showcurrent='{ showcurrent }')
 
   script(type='text/coffeescript').
-    @emojis = []
-    fuse = original = null
+    original = @emojis = Immutable.List()
 
     aja()
       .method 'get'
       .url '/data/emojis.json'
       .on 'success', (emojis)=>
-        original = for emoji in emojis
-          name: emoji.name
-          unicode: emoji.keywords[emoji.keywords.length-1]
-          keywords: emoji.keywords.slice 0, -1
+        original = Immutable.List emojis.map (emoji)->
+          emoji.forSearch = [emoji.name].concat(emoji.keywords).join(',')
+          emoji.unicode = emoji.keywords[emoji.keywords.length - 1]
+          emoji.keywords = emoji.keywords.slice 0, -1
+          emoji
         @update
           emojis: original
-        fuse = new Fuse original,
-          threshold: 0.1
-          distance: 800
-          keys: ['name', 'keywords']
         hash = location.hash.replace /#/, ''
         document.getElementById('in').value = hash
         @change
@@ -35,8 +32,15 @@ finder
         target:
           value: event.target.innerText
 
-    @change = (event)=>
-      searchWord = event.target.value
+    @showcurrent = (event)=>
       @update
-        emojis: if searchWord.length is 0 then original else fuse.search searchWord
-      location.hash = searchWord
+        current:
+          name: event.target.getAttribute 'data-emoji-name'
+          unicode: event.target.getAttribute 'data-emoji-unicode'
+          keywords: event.target.getAttribute('data-emoji-keywords').split ','
+
+    @change = (event)=>
+      r = new RegExp event.target.value.replace /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'
+      @update
+        emojis: original.filter (emoji)-> emoji.forSearch.search(r) isnt -1
+      location.hash = event.target.value
