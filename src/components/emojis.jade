@@ -1,22 +1,10 @@
 emojis
-  #info(if='{ current }')
-    p.current-container(onclick='{ copy }')
-      span(class='emo emoji v-align s_{ current.name.replace(/\\\\+/, "") }')
-      input#currentInput.v-align(value=':{ current.name }:')
-    p
-      span.tag.tag-blue { current.unicode }
-      span.tag.tag-green(each='{ key in current.keywords }', onclick='{ parent.tagSearch }') { key }
-      a(href='https://github.com/jgsme/emo/edit/master/src/data/emojis.custom.ja.json'): span.tag.tag-red Add new one?
-  span(each='{ emoji in emojis }', class='emo emo-margin emoji s_{ emoji.name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data='{ JSON.stringify(emoji) }')
+  span(each='{ emojis }', class='emo emo-margin emoji s_{ name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data-emoji-name='{ name }', data-emoji-keywords='{ keywords }', data-emoji-unicode='{ unicode }')
 
   script(type='text/coffeescript').
-    @emojis = []
-
     @show = (event)=>
-      @current = JSON.parse event.target.getAttribute 'data'
       document.body.scrollTop = 0
-    @copy = (event)=> document.getElementById('currentInput').select()
-    @tagSearch = opts.tagsearch
+      opts.showcurrent event
 
     @on 'update', =>
-      @emojis = opts.data
+      @emojis = opts.data.toArray()
