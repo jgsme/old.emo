@@ -1,5 +1,5 @@
 emojis
-  span(each='{ emojis }', class='emo emo-margin emoji s_{ name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data-emoji-name='{ name }', data-emoji-keywords='{ keywords }', data-emoji-unicode='{ unicode }')
+  span(each='{ emojis }', class='emo emo-margin emoji s_{ name.replace(/\\\\+/, "") }', onclick='{ parent.show }', data-emoji-name='{ name }', data-emoji-keywords='{ keywords.toString() }', data-emoji-unicode='{ unicode }')
 
   script(type='text/coffeescript').
     @show = (event)=>
